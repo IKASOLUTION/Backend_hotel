@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="paiements_subreport"
+              pageWidth="205" pageHeight="842" columnWidth="205" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+
+    <!-- Styles pour le tableau des paiements -->
+    <style name="TableHeader" fontName="DejaVu Sans" fontSize="7" isBold="true">
+        <pen lineColor="#FFFFFF"/>
+    </style>
+    <style name="TableCell" fontName="DejaVu Sans" fontSize="7">
+        <pen lineColor="#2C3E50"/>
+    </style>
+
+    <!-- ==================== FIELDS ==================== -->
+    <field name="datePaiement" class="java.time.LocalDate"/>
+    <field name="montantPaye" class="java.math.BigDecimal"/>
+    <field name="modePaiement" class="test.projects.ennov.domain.enums.ModePaiement"/>
+
+    <!-- ==================== COLUMN HEADER ==================== -->
+    <columnHeader>
+        <band height="15">
+            <!-- En-tête du tableau des paiements -->
+            <rectangle>
+                <reportElement x="0" y="0" width="205" height="15" backcolor="#34495E"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#2C3E50"/>
+                </graphicElement>
+            </rectangle>
+            
+            <staticText>
+                <reportElement style="TableHeader" x="2" y="2" width="50" height="11" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="6" isBold="true"/>
+                </textElement>
+                <text><![CDATA[DATE]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement style="TableHeader" x="54" y="2" width="70" height="11" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="6" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MONTANT]]></text>
+            </staticText>
+            
+            <staticText>
+                <reportElement style="TableHeader" x="126" y="2" width="77" height="11" forecolor="#FFFFFF"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="6" isBold="true"/>
+                </textElement>
+                <text><![CDATA[MODE PAIEMENT]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <!-- ==================== DETAIL ==================== -->
+    <detail>
+        <band height="12">
+            <!-- Ligne alternée -->
+            <rectangle>
+                <reportElement x="0" y="0" width="205" height="12" backcolor="#F8F9FA">
+                    <printWhenExpression><![CDATA[$V{REPORT_COUNT} % 2 == 0]]></printWhenExpression>
+                </reportElement>
+                <graphicElement>
+                    <pen lineWidth="0.0"/>
+                </graphicElement>
+            </rectangle>
+            
+            <!-- Bordures des cellules -->
+            <textField pattern="dd/MM/yy" isBlankWhenNull="true">
+                <reportElement style="TableCell" x="2" y="1" width="50" height="10"/>
+                <box>
+                    <pen lineWidth="0.5" lineColor="#DEE2E6"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{datePaiement}]]></textFieldExpression>
+            </textField>
+            
+            <textField pattern="#,##0" isBlankWhenNull="true">
+                <reportElement style="TableCell" x="54" y="1" width="70" height="10"/>
+                <box>
+                    <pen lineWidth="0.5" lineColor="#DEE2E6"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{montantPaye}]]></textFieldExpression>
+            </textField>
+            
+            <textField isBlankWhenNull="true">
+                <reportElement style="TableCell" x="126" y="1" width="77" height="10"/>
+                <box>
+                    <pen lineWidth="0.5" lineColor="#DEE2E6"/>
+                </box>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font size="6"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{modePaiement} != null ? $F{modePaiement}.toString() : "N/A"]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- ==================== NO DATA ==================== -->
+    <noData>
+        <band height="20">
+            <rectangle>
+                <reportElement x="0" y="0" width="205" height="20" backcolor="#F8F9FA"/>
+                <graphicElement>
+                    <pen lineWidth="0.5" lineColor="#DEE2E6"/>
+                </graphicElement>
+            </rectangle>
+            <staticText>
+                <reportElement x="10" y="5" width="185" height="10" forecolor="#7F8C8D"/>
+                <textElement textAlignment="Center" verticalAlignment="Middle">
+                    <font fontName="DejaVu Sans" size="7" isItalic="true"/>
+                </textElement>
+                <text><![CDATA[Aucun paiement enregistré]]></text>
+            </staticText>
+        </band>
+    </noData>
+</jasperReport>

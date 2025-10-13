@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="recu_caisse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="da12b081-a766-40cc-b458-989d40be1911">
+	<style name="footerStyle" forecolor="#333333" fontName="Arial" fontSize="9" isBold="false">
+		<box>
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="ModernText" fontName="SansSerif" fontSize="10"/>
+	<style name="ModernTitle" fontName="SansSerif" fontSize="14" isBold="true"/>
+	<style name="ModernHeader" fontName="DejaVu Sans" fontSize="12" isBold="true">
+		<pen lineColor="#2C3E50"/>
+	</style>
+	<style name="ModernSubtitle" fontName="DejaVu Sans" fontSize="14" isBold="true">
+		<pen lineColor="#34495E"/>
+	</style>
+	<style name="ModernTableHeader" fontName="DejaVu Sans" fontSize="9" isBold="true">
+		<pen lineColor="#FFFFFF"/>
+	</style>
+	<style name="ModernTableCell" fontName="DejaVu Sans" fontSize="9">
+		<pen lineColor="#2C3E50"/>
+	</style>
+	<style name="ModernFooter" fontName="DejaVu Sans" fontSize="8">
+		<pen lineColor="#7F8C8D"/>
+	</style>
+	<style name="AccentText" fontName="DejaVu Sans" fontSize="10" isBold="true">
+		<pen lineColor="#3498DB"/>
+	</style>
+	<style name="HeaderStyle" forecolor="#2C3E50" fontName="Arial" fontSize="14" isBold="true"/>
+	<style name="TitleStyle" forecolor="#E74C3C" fontName="Arial" fontSize="18" isBold="true"/>
+	<style name="SubtitleStyle" forecolor="#3498DB" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="NormalText" forecolor="#2C3E50" fontName="Arial" fontSize="10"/>
+	<style name="SmallText" forecolor="#7F8C8D" fontName="Arial" fontSize="8"/>
+	<style name="AmountStyle" forecolor="#27AE60" fontName="Arial" fontSize="12" isBold="true"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="numeroRecu" class="java.lang.String"/>
+	<parameter name="dateEmission" class="java.lang.String"/>
+	<parameter name="nomEntreprise" class="java.lang.String"/>
+	<parameter name="adresseEntreprise" class="java.lang.String"/>
+	<parameter name="telEntreprise" class="java.lang.String"/>
+	<parameter name="ifu" class="java.lang.String"/>
+	<parameter name="rccm" class="java.lang.String"/>
+	<parameter name="clientNom" class="java.lang.String"/>
+	<parameter name="clientTelephone" class="java.lang.String"/>
+	<parameter name="montantRestant" class="java.math.BigDecimal"/>
+	<parameter name="montantTotal" class="java.math.BigDecimal"/>
+	<parameter name="montantPaye" class="java.math.BigDecimal"/>
+	<parameter name="commandeNumero" class="java.lang.String"/>
+	<field name="commandeNumero" class="java.lang.String"/>
+	<field name="montantPaye" class="java.math.BigDecimal"/>
+	<field name="datePaiement" class="java.lang.String"/>
+	<field name="modePaiement" class="java.lang.String"/>
+	<field name="montantPaiement" class="java.math.BigDecimal"/>
+	<field name="dateEcheance" class="java.lang.String"/>
+	<variable name="totalPayments" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{montantPaiement}]]></variableExpression>
+	</variable>
+	<pageHeader>
+		<band height="150">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="145" backcolor="#F8F9FA" uuid="11111111-1111-1111-1111-111111111111"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#DEE2E6"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="40" backcolor="#E74C3C" uuid="22222222-2222-2222-2222-222222222222"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="TitleStyle" x="20" y="10" width="150" height="20" forecolor="#FFFFFF" uuid="33333333-3333-3333-3333-333333333333"/>
+				<text><![CDATA[REÇU DE PAIEMENT]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="HeaderStyle" x="400" y="10" width="145" height="20" forecolor="#FFFFFF" uuid="44444444-4444-4444-4444-444444444444"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["N° " + $P{numeroRecu}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="20" y="50" width="260" height="80" backcolor="#FFFFFF" uuid="55555555-5555-5555-5555-555555555555"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#BDC3C7"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="FillFrame">
+				<reportElement x="25" y="55" width="50" height="50" uuid="53b243e0-2813-4cac-900d-6c0a19ff1757"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement style="NormalText" x="80" y="75" width="190" height="12" uuid="77777777-7777-7777-7777-777777777777"/>
+				<textFieldExpression><![CDATA[$P{nomEntreprise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="80" y="90" width="190" height="10" uuid="88888888-8888-8888-8888-888888888888"/>
+				<textFieldExpression><![CDATA[$P{adresseEntreprise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="30" y="105" width="120" height="10" uuid="99999999-9999-9999-9999-999999999999"/>
+				<textFieldExpression><![CDATA["Tél: " + $P{telEntreprise}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="160" y="105" width="100" height="10" uuid="10101010-1010-1010-1010-101010101010"/>
+				<textFieldExpression><![CDATA["IFU: " + $P{ifu}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="295" y="50" width="240" height="80" backcolor="#E8F4FD" uuid="20202020-2020-2020-2020-202020202020"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#3498DB"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="SubtitleStyle" x="305" y="55" width="100" height="15" uuid="30303030-3030-3030-3030-303030303030"/>
+				<text><![CDATA[CLIENT]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="NormalText" x="305" y="75" width="220" height="12" uuid="40404040-4040-4040-4040-404040404040"/>
+				<textFieldExpression><![CDATA[$P{clientNom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="305" y="90" width="220" height="10" uuid="50505050-5050-5050-5050-505050505050"/>
+				<textFieldExpression><![CDATA["Tél: " + $P{clientTelephone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="305" y="105" width="220" height="10" uuid="60606060-6060-6060-6060-606060606060"/>
+				<textFieldExpression><![CDATA["Code " + $P{commandeNumero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="SmallText" x="305" y="118" width="220" height="10" uuid="70707070-7070-7070-7070-707070707070"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Émis le: " + $P{dateEmission}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="35">
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="20" backcolor="#2C3E50" uuid="80808080-8080-8080-8080-808080808080"/>
+			</rectangle>
+			<staticText>
+				<reportElement style="HeaderStyle" x="10" y="12" width="100" height="16" forecolor="#FFFFFF" uuid="90909090-9090-9090-9090-909090909090"/>
+				<text><![CDATA[DATE PAIEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="120" y="12" width="120" height="16" forecolor="#FFFFFF" uuid="10111111-1111-1111-1111-111111111111"/>
+				<text><![CDATA[MODE PAIEMENT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="250" y="12" width="100" height="16" forecolor="#FFFFFF" uuid="11222222-2222-2222-2222-222222222222"/>
+				<text><![CDATA[ÉCHÉANCE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="HeaderStyle" x="360" y="12" width="100" height="16" forecolor="#FFFFFF" uuid="12333333-3333-3333-3333-333333333333"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[MONTANT]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="32" width="555" height="1" forecolor="#BDC3C7" uuid="13444444-4444-4444-4444-444444444444"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="NormalText" x="10" y="5" width="100" height="15" uuid="14555555-5555-5555-5555-555555555555"/>
+				<textFieldExpression><![CDATA[$F{datePaiement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="NormalText" x="120" y="5" width="120" height="15" uuid="15666666-6666-6666-6666-666666666666"/>
+				<textFieldExpression><![CDATA[$F{modePaiement}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement style="NormalText" x="250" y="5" width="100" height="15" uuid="16777777-7777-7777-7777-777777777777"/>
+				<textFieldExpression><![CDATA[$F{dateEcheance} != null ? $F{dateEcheance} : "Immédiat"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 &apos;F&apos;">
+				<reportElement style="AmountStyle" isPrintRepeatedValues="false" x="360" y="5" width="100" height="15" uuid="17888888-8888-8888-8888-888888888888"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{montantPaiement}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="22" width="555" height="1" forecolor="#ECF0F1" uuid="18999999-9999-9999-9999-999999999999"/>
+			</line>
+		</band>
+	</detail>
+	<summary>
+		<band height="200">
+			<rectangle>
+				<reportElement x="300" y="20" width="255" height="100" backcolor="#F5F6FA" uuid="19000000-0000-0000-0000-000000000000"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#BDC3C7"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="SubtitleStyle" x="310" y="25" width="100" height="15" uuid="20111111-1111-1111-1111-111111111111"/>
+				<text><![CDATA[RÉSUMÉ FINANCIER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="NormalText" x="310" y="45" width="120" height="12" uuid="21222222-2222-2222-2222-222222222222"/>
+				<text><![CDATA[Montant total commande:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 &apos;F&apos;">
+				<reportElement style="NormalText" x="440" y="45" width="100" height="12" uuid="22333333-3333-3333-3333-333333333333"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{montantTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="NormalText" x="310" y="60" width="120" height="12" uuid="23444444-4444-4444-4444-444444444444"/>
+				<text><![CDATA[Total payé:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00 &apos;F&apos;">
+				<reportElement style="AmountStyle" x="440" y="60" width="100" height="12" uuid="24555555-5555-5555-5555-555555555555"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{montantPaye}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="310" y="75" width="235" height="1" forecolor="#BDC3C7" uuid="25666666-6666-6666-6666-666666666666"/>
+			</line>
+			<staticText>
+				<reportElement style="HeaderStyle" x="310" y="80" width="120" height="20" forecolor="#E74C3C" uuid="26777777-7777-7777-7777-777777777777"/>
+				<text><![CDATA[SOLDE RESTANT:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="#,##0.00 &apos;F&apos;">
+				<reportElement style="HeaderStyle" x="440" y="80" width="100" height="20" forecolor="#E74C3C" uuid="27888888-8888-8888-8888-888888888888"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$P{montantRestant}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="HeaderStyle" x="20" y="30" width="250" height="20" uuid="28999999-9999-9999-9999-999999999999"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{montantRestant}.compareTo(new java.math.BigDecimal("0")) == 0 ? "✓ PAIEMENT COMPLET" : "⚠ PAIEMENT PARTIEL"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement style="SmallText" x="20" y="130" width="515" height="30" uuid="29000000-0000-0000-0000-000000000000"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Ce reçu atteste du paiement des montants mentionnés ci-dessus.
+Conservez ce document comme justificatif de paiement.]]></text>
+			</staticText>
+			<line>
+				<reportElement x="350" y="180" width="150" height="1" forecolor="#BDC3C7" uuid="30111111-1111-1111-1111-111111111111"/>
+			</line>
+			<staticText>
+				<reportElement style="SmallText" x="350" y="185" width="150" height="10" uuid="31222222-2222-2222-2222-222222222222"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Signature et cachet]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

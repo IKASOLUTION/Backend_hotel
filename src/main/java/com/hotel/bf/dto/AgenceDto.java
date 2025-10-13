@@ -1,0 +1,29 @@
+package com.hotel.bf.dto;
+
+
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
+public class AgenceDto extends AbstractAuditEntityDto{
+
+    private Long id;
+    private String libelle;
+    private String ville;
+    private String code;
+    private FilialeDto filiale;
+    // private Boolean deleted;
+
+    
+}

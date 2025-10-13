@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.8.0.final using JasperReports Library version 6.8.0-2ed8dfabb690ff337a5797129f2cd92902b0c87b  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="proforma_odoo_style" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="40" uuid="b7c9df8f-b6c7-4fd6-83f7-df10ac33cd12">
+	<style name="footerStyle" forecolor="#333333" fontName="Arial" fontSize="9" isBold="false">
+		<box>
+			<pen lineWidth="0.0"/>
+		</box>
+	</style>
+	<style name="ModernText" fontName="SansSerif" fontSize="10"/>
+	<style name="ModernTitle" fontName="SansSerif" fontSize="14" isBold="true"/>
+	<style name="ModernHeader" fontName="DejaVu Sans" fontSize="12" isBold="true">
+		<pen lineColor="#2C3E50"/>
+	</style>
+	<style name="ModernSubtitle" fontName="DejaVu Sans" fontSize="14" isBold="true">
+		<pen lineColor="#34495E"/>
+	</style>
+	<style name="ModernTableHeader" fontName="DejaVu Sans" fontSize="9" isBold="true">
+		<pen lineColor="#FFFFFF"/>
+	</style>
+	<style name="ModernTableCell" fontName="DejaVu Sans" fontSize="9">
+		<pen lineColor="#2C3E50"/>
+	</style>
+	<style name="ModernFooter" fontName="DejaVu Sans" fontSize="8">
+		<pen lineColor="#7F8C8D"/>
+	</style>
+	<style name="AccentText" fontName="DejaVu Sans" fontSize="10" isBold="true">
+		<pen lineColor="#3498DB"/>
+	</style>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="cachet" class="java.io.InputStream"/>
+	<parameter name="etab" class="java.lang.String"/>
+	<parameter name="adresse" class="java.lang.String"/>
+	<parameter name="tel" class="java.lang.String"/>
+	<parameter name="email" class="java.lang.String"/>
+	<parameter name="client" class="java.lang.String"/>
+	<parameter name="numeroCommande" class="java.lang.String"/>
+	<parameter name="ref" class="java.lang.String"/>
+	<parameter name="banque1" class="java.lang.String"/>
+	<parameter name="banque2" class="java.lang.String"/>
+	<parameter name="compte1" class="java.lang.String"/>
+	<parameter name="compte2" class="java.lang.String"/>
+	<parameter name="rccm" class="java.lang.String"/>
+	<parameter name="tel2" class="java.lang.String"/>
+	<parameter name="ifu" class="java.lang.String"/>
+	<parameter name="dateImpression" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="jourDelivre" class="java.lang.String"/>
+	<parameter name="COPYRIGHT" class="java.lang.String"/>
+	<parameter name="loImage" class="java.io.InputStream"/>
+	<parameter name="dateCommande" class="java.lang.String"/>
+	<parameter name="codeClient" class="java.lang.String"/>
+	<field name="materiel" class="java.lang.String"/>
+	<field name="quantiteLivre" class="java.lang.String"/>
+	<field name="quantiteRestant" class="java.lang.String"/>
+	<field name="quantite" class="java.lang.String"/>
+	<title>
+		<band height="175">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="8" backcolor="#3498DB" uuid="a4863d60-4788-431f-af4e-e4531137baa6"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="8" width="555" height="120" backcolor="#ECF0F1" uuid="051cc44f-db3a-4f23-865d-2a56b39209fb"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<frame>
+				<reportElement x="20" y="20" width="515" height="100" uuid="df20770a-005e-4a96-81e9-27aa0c2c8a67"/>
+				<rectangle>
+					<reportElement x="0" y="10" width="80" height="80" backcolor="#FFFFFF" uuid="bc543df2-e86a-4a01-b46f-a435243c8b3d"/>
+					<graphicElement>
+						<pen lineWidth="1.0" lineColor="#BDC3C7"/>
+					</graphicElement>
+				</rectangle>
+				<image scaleImage="FillFrame">
+					<reportElement x="5" y="15" width="70" height="70" uuid="787387c0-a52d-4ba2-8568-81a4d766942c"/>
+					<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+				</image>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="ModernTitle" x="100" y="10" width="415" height="25" forecolor="#2C3E50" uuid="da419844-5526-490d-a754-b706146289f8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="18" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{etab}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="ModernText" x="100" y="35" width="300" height="15" uuid="965aecf3-878a-4c79-b87e-1c7d6ed9880f"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Adresse: " + $P{adresse}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="ModernText" x="100" y="50" width="300" height="15" uuid="5014cd30-40a7-482d-8f9d-b65af436b9de"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tel: " + $P{tel}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="ModernText" x="100" y="65" width="300" height="15" uuid="6dd10967-5547-4ed8-8006-f55604b1d451"/>
+					<textElement>
+						<font size="9"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Email: " + $P{email}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<rectangle>
+				<reportElement x="150" y="140" width="310" height="35" backcolor="#3498DB" uuid="0d0d951e-a169-4359-8716-635203b992f9"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="150" y="140" width="310" height="35" forecolor="#FFFFFF" uuid="1eaf8a3f-9064-48c1-8ce8-3fde4bf8217d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["BORDEREAU N°:" + $P{numeroCommande}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="80">
+			<rectangle>
+				<reportElement x="0" y="10" width="350" height="70" backcolor="#F8F9FA" uuid="4cda7bb2-aa8b-45bd-9dba-b907759cefad"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#DEE2E6"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="ModernSubtitle" x="10" y="15" width="100" height="15" forecolor="#3498DB" uuid="d0852a93-5ce0-490d-b3c0-48688875a8c3"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMATIONS CLIENT]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="ModernText" x="10" y="35" width="330" height="12" uuid="2b1cbcbf-a8bf-4668-acb9-d37f8fb6f963"/>
+				<textFieldExpression><![CDATA["Code Client: " + $P{codeClient}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="ModernText" x="10" y="47" width="330" height="12" uuid="348236dd-4527-4de4-95ac-b7822574de5b"/>
+				<textFieldExpression><![CDATA["Client: " + $P{client}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="370" y="10" width="185" height="70" backcolor="#E8F4FD" uuid="b84a66e3-c316-4b41-bb9d-48d604d8351c"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#3498DB"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement style="AccentText" x="380" y="15" width="165" height="15" uuid="ecbaf095-417b-404b-ab53-9da3d8025441"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DÉTAILS DOCUMENT]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="ModernText" x="380" y="35" width="165" height="12" uuid="37cdd11a-d571-4d49-8dcd-d02f5483da96"/>
+				<textFieldExpression><![CDATA["Établi le: " + $P{dateCommande}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement style="ModernText" x="380" y="47" width="165" height="12" uuid="f222d7c1-a971-4c30-bea8-95d7602a222b"/>
+				<textFieldExpression><![CDATA["Lieu: Ouagadougou"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="ModernText" x="380" y="59" width="165" height="12" uuid="5250f485-a623-4bd8-a1a9-f895cdf5bb14"/>
+				<textFieldExpression><![CDATA["Imprimé le: " + $P{dateImpression}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30">
+			<rectangle>
+				<reportElement x="0" y="5" width="555" height="25" backcolor="#2C3E50" uuid="432ebf78-f352-4b4c-a3f5-d717af92adca"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="5" width="240" height="25" forecolor="#FFFFFF" uuid="6b3485f7-734e-413b-8aab-0a65cc39a8c1"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Matériel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="5" width="105" height="25" forecolor="#FFFFFF" uuid="514c40eb-b9fd-4e25-8860-1f3f6aeb4161">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qté commandée]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="5" width="105" height="25" forecolor="#FFFFFF" uuid="c171beca-2435-42f8-bada-d929d7ab3f61"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qté restante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="345" y="5" width="105" height="25" forecolor="#FFFFFF" uuid="8592a053-9621-45c2-94c7-d7583533350f">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineColor="#FFFFFF"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qté livrée]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="13">
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="0" y="0" width="240" height="13" uuid="191999ea-4172-42ba-8c52-030201b5e29d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[" "+$F{materiel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="240" y="0" width="105" height="13" uuid="2d7b9b99-7eba-4337-bbf1-d59fd2c41b66">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{quantite}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="450" y="0" width="105" height="13" uuid="8269deec-6e19-40e1-9a3e-947845322769"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{quantiteRestant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="ContainerHeight" x="345" y="0" width="105" height="13" uuid="512b4092-a0d0-45ca-bdad-a4fd6ef7b64b">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{quantiteLivre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="80">
+			<line>
+				<reportElement x="0" y="5" width="555" height="1" forecolor="#3498DB" uuid="e212d41d-2b0c-47e0-a015-5ecd9e33e800"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="10" width="555" height="45" backcolor="#F8F9FA" uuid="aa6fef19-a631-4192-8d3e-a32505d645ee"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#DEE2E6"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="10" y="15" width="535" height="20" backcolor="#E8F4FD" uuid="592ea0e5-6d30-423d-99f1-eb0953cb4b53"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#3498DB"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="17" width="120" height="8" forecolor="#2C3E50" uuid="c5f067cb-2e3e-4807-8a98-32adcf9e7d95"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[INFORMATIONS BANCAIRES]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="25" width="260" height="8" forecolor="#34495E" uuid="69428670-4d9f-4c05-a37f-8f9469611e86"/>
+				<textElement>
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Banque : " + $P{banque1} + " - Compte: " + $P{compte1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="280" y="25" width="260" height="8" forecolor="#34495E" uuid="18ce38c1-43c3-4ca3-a237-2f71f997cac3"/>
+				<textElement textAlignment="Right">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Banque : " + $P{banque2} + " - Compte: " + $P{compte2}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="38" width="525" height="8" forecolor="#7F8C8D" uuid="77bd0084-ddbc-4e5d-826e-099247c8cf30"/>
+				<textElement textAlignment="Center">
+					<font size="7" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Adresse: "  +$P{tel2} + " | IFU: " + $P{ifu} + " | RCCM: " + $P{rccm}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="15" y="47" width="525" height="8" forecolor="#95A5A6" uuid="a378e66b-e0d4-44f2-b1a6-74ec75c5561e"/>
+				<textElement textAlignment="Center">
+					<font size="6" isBold="false" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ouagadougou, Burkina Faso - Entreprise certifiée et agréée"]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="60" width="555" height="18" backcolor="#2C3E50" uuid="a7864ae9-176f-4eea-9633-c1f0745cdbd5"/>
+			</rectangle>
+			<textField evaluationTime="Report">
+				<reportElement x="15" y="63" width="180" height="12" forecolor="#ECF0F1" uuid="8cebefa7-29ce-4492-ab1e-d930b16eb7eb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + "/" + $V{PAGE_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="63" width="155" height="12" forecolor="#BDC3C7" uuid="256c7f78-a2d3-4ff9-aa2c-223dcf3c3fe8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Imprimé le " + $P{dateImpression}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="63" width="185" height="12" forecolor="#95A5A6" uuid="06509057-b8f3-4a44-88be-c356150d1b55"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Design by bamyes – À usage exclusivement commercial"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="79" width="555" height="1" forecolor="#3498DB" uuid="dff56ad4-b062-46c8-b969-ae2a966579cd"/>
+				<graphicElement>
+					<pen lineWidth="1.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="120">
+			<line>
+				<reportElement x="0" y="10" width="555" height="2" forecolor="#3498DB" uuid="11111111-1111-1111-1111-111111111111"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<rectangle>
+				<reportElement x="0" y="20" width="555" height="80" backcolor="#FAFBFC" uuid="22222222-2222-2222-2222-222222222222"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#E1E8ED"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="220" y="25" width="115" height="15" forecolor="#2C3E50" uuid="33333333-3333-3333-3333-333333333333"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SIGNATURES]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="20" y="45" width="240" height="50" backcolor="#FFFFFF" uuid="44444444-4444-4444-4444-444444444444"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#BDC3C7"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="30" y="50" width="80" height="12" forecolor="#3498DB" uuid="55555555-5555-5555-5555-555555555555"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE LIVREUR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="65" width="220" height="8" forecolor="#95A5A6" uuid="66666666-6666-6666-6666-666666666666"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Signature et cachet]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="80" width="100" height="10" forecolor="#7F8C8D" uuid="77777777-7777-7777-7777-777777777777"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date: " + $P{dateImpression}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="80" width="110" height="10" forecolor="#7F8C8D" uuid="88888888-8888-8888-8888-888888888888"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Nom: _________________]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="295" y="45" width="240" height="50" backcolor="#FFFFFF" uuid="99999999-9999-9999-9999-999999999999"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineStyle="Dashed" lineColor="#BDC3C7"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="305" y="50" width="120" height="12" forecolor="#E74C3C" uuid="10101010-1010-1010-1010-101010101010"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LE RÉCEPTIONNISTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="305" y="65" width="220" height="8" forecolor="#95A5A6" uuid="20202020-2020-2020-2020-202020202020"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Signature et cachet]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="305" y="80" width="100" height="10" forecolor="#7F8C8D" uuid="30303030-3030-3030-3030-303030303030"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Date: " + $P{dateImpression}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="415" y="80" width="110" height="10" forecolor="#7F8C8D" uuid="40404040-4040-4040-4040-404040404040"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[Nom: _________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="105" width="455" height="10" forecolor="#95A5A6" uuid="50505050-5050-5050-5050-505050505050"/>
+				<textElement textAlignment="Center">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Ce document fait foi de la livraison et de la réception des marchandises mentionnées ci-dessus]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="118" width="555" height="1" forecolor="#BDC3C7" uuid="60606060-6060-6060-6060-606060606060"/>
+			</line>
+		</band>
+	</summary>
+</jasperReport>
