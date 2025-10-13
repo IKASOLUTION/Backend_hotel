@@ -24,23 +24,11 @@ public class TraceMapper {
                 .build();
     }
 
-   /*  public Filiale toEntity(FilialeDto filialeDto) {
-        return Filiale.builder()
-                .id(filialeDto.getId())
-                .pays(filialeDto.getPays())
-                .nom(filialeDto.getNom())
-                .codeBanque(filialeDto.getCodeBanque())
-                .code(filialeDto.getCode())
-                .deleted(filialeDto.getIsDeleted())
-                
-                .build();
-    } */
+  
 
     public List<TraceDto> toDtos(List<Trace> traces) {
         return traces.stream().map(this::toDto).toList();
     }
 
-   /*  public List<Filiale> toEntities(List<FilialeDto> filialeDtos) {
-        return filialeDtos.stream().map(this::toEntity).toList();
-    } */
+   
 }

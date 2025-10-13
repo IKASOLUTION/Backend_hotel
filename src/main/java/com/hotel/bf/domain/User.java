@@ -88,12 +88,12 @@ public class User extends AbstractAuditEntity implements Serializable {
     private String password;
 
     @Size(max = 50)
-    @Column(name = "first_name", length = 50)
-    private String firstName;
+    @Column(name = "nom", length = 50)
+    private String nom;
 
     @Size(max = 50)
-    @Column(name = "last_name", length = 50)
-    private String lastName;
+    @Column(name = "prenom", length = 50)
+    private String prenom;
 
     @NotNull
     @Column(nullable = false)
@@ -117,18 +117,30 @@ public class User extends AbstractAuditEntity implements Serializable {
      @Column(name = "reset_date")
     private Instant resetDate;
     
-   /*  @ManyToOne(cascade = CascadeType.MERGE)
-    @JsonIgnoreProperties(value = {"ennov_users"})
-    private Agence agence; */
+  
     @Column(name = "pass_change")
     private Boolean passChange;
     
     @ManyToOne(cascade = CascadeType.MERGE)
     @JsonIgnoreProperties(value = {"ennov_users"})
     private Profil profil;
-    /* @ManyToOne(cascade = CascadeType.MERGE)
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(nullable = true)
     @JsonIgnoreProperties(value = {"ennov_users"})
-    private Filiale filiale; */
+    private Region region;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(nullable = true)
+    @JsonIgnoreProperties(value = {"ennov_users"})
+    private Province province;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(nullable = true)
+    @JsonIgnoreProperties(value = {"ennov_users"})
+    private Commune commune;
+    @ManyToOne(cascade = CascadeType.MERGE)
+        @JoinColumn(nullable = true)
+    @JsonIgnoreProperties(value = {"ennov_users"})
+    private Hotel hotel;
 
     @Column(name = "deleted")
     private Boolean deleted; 

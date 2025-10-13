@@ -42,8 +42,8 @@ public class UserDto extends AbstractAuditEntityDto {
     private String emailAddress;
 
     private String password;
-    private String firstName;
-    private String lastName;
+    private String nom;
+    private String prenom;
     private boolean activated;
     private String activationKey;
     private String resetKey;

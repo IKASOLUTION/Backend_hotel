@@ -105,9 +105,9 @@ public class UserService {
         user.setActivationKey(RandomUtil.generateActivationKey());
        // user.setAgence(userDto.getAgence());
        // user.setProfil(userDto.getProfil());
-        user.setFirstName(userDto.getFirstName());
+        user.setNom(userDto.getNom());
         user.setUsername(userDto.getLogin());
-        user.setLastName(userDto.getLastName());
+        user.setPrenom(userDto.getPrenom());
         user.setEmail(userDto.getEmailAddress().toLowerCase());
         String token = UUID.randomUUID().toString();
         user.setVerificationToken(token);
@@ -115,15 +115,15 @@ public class UserService {
        /*  ParametreMail parametreMail = mailRepository.findByCode(200L);
         String confirmationUrl = "http://localhost:8092/api/users/verify-email?token=" + token;
         emailService.sendNewMail(userDto.getEmailAddress(), parametreMail.getObjet(), 
-        "Bonjour Mr/Mme "+userDto.getFirstName()+" "+userDto.getLastName()+", <br/><br/>\r\nCi-dessous vos param&egrave;tres de connexion &agrave; l\'application ERELEVE :<br/><br/>\r\nIdentifiant = "+user.getUsername()+" <br/>\r\nMot de passe = "+pass+" <br/><br/>\r\nNB : Une modification de votre mot de passe &agrave; la premi&egrave;re connexion est recommand&eacute;e<br/><br/>\r\nCliquez sur le lieu ci-dessous pour acc&eacute;der l&rsquo;application :<br/><br/>\r\n<a href=\""+confirmationUrl+"\">RELEVE</a><br/><br/>\r\n<h2 style=\"color:red;\">Nous vous recommandons l\'utilisation du navigateur Google Chrome</h2><br/><br/>\r\nCordialement.<br/><br/>\r\nCE MAIL EST ISSU D&rsquo;UN AUTOMATE. NE PAS REPONDRE.', 'MAIL POUR ACTIVATION DE COMPTE UTILISATEUR.");
+        "Bonjour Mr/Mme "+userDto.getNom()+" "+userDto.getPrenom()+", <br/><br/>\r\nCi-dessous vos param&egrave;tres de connexion &agrave; l\'application ERELEVE :<br/><br/>\r\nIdentifiant = "+user.getUsername()+" <br/>\r\nMot de passe = "+pass+" <br/><br/>\r\nNB : Une modification de votre mot de passe &agrave; la premi&egrave;re connexion est recommand&eacute;e<br/><br/>\r\nCliquez sur le lieu ci-dessous pour acc&eacute;der l&rsquo;application :<br/><br/>\r\n<a href=\""+confirmationUrl+"\">RELEVE</a><br/><br/>\r\n<h2 style=\"color:red;\">Nous vous recommandons l\'utilisation du navigateur Google Chrome</h2><br/><br/>\r\nCordialement.<br/><br/>\r\nCE MAIL EST ISSU D&rsquo;UN AUTOMATE. NE PAS REPONDRE.', 'MAIL POUR ACTIVATION DE COMPTE UTILISATEUR.");
     */    
      } else {
 
             user = userRepository.findOneByDeletedFalseAndId(userDto.getId());
            //  user.setAgence(userDto.getAgence());
            // user.setProfil(userDto.getProfil());
-            user.setFirstName(userDto.getFirstName());
-            user.setLastName(userDto.getLastName());
+            user.setNom(userDto.getNom());
+            user.setPrenom(userDto.getPrenom());
             user.setEmail(userDto.getEmailAddress().toLowerCase());
             
            
@@ -266,17 +266,14 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(accountDto.getLogin(), accountDto.getPassword());
 
         log.debug("Auth token : {}", authenticationToken.getCredentials());
-
         Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(accountDto.getLogin());
-       
-        Map<String, String> jwt = tokenProvider.generateTokenPair(userDetails,false);
+        Map<String, String> jwt = tokenProvider.generateTokenPair(userDetails,accountDto.getRememberMe());
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(AuthTokenFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         boolean result = userRepository.existsByDeletedFalseAndUsername(accountDto.getLogin());
       //  SecurityUtils.getCurrentUsername();
-
         if (!result) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad credentials, Login or password incorrect.");
         }

@@ -161,10 +161,11 @@ public class UserController {
     })
     private ResponseEntity<LoginResponse> login(@Valid @RequestBody final AccountDto accountDto) {
         
-
+System.out.println("==============ppppppp========");
         if (!userRepository.existsByDeletedFalseAndUsername(accountDto.getLogin())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account not found.");
         }
+        System.out.println("=======111=======ppppppp========");
 
         return userService.login(accountDto);
     }

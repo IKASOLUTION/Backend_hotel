@@ -14,13 +14,13 @@ import com.hotel.bf.domain.Region;
 @Component
 public class ProvinceMapper {
     @Autowired
-    RegionMapper regionMapper;
+    private RegionMapper regionMapper;
 
     public ProvinceDto toDto(Province dt) {
         return ProvinceDto.builder()
                 .id(dt.getId())
                 .libelle(dt.getLibelle())
-                .region(regionMapper.toDto(dt.getRegion()))
+                .region(dt.getRegion() != null ? regionMapper.toDto(dt.getRegion()) : null)
                 .isDeleted(dt.getDeleted())
                 .build();
     }
