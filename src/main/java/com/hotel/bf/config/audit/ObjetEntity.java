@@ -16,7 +16,10 @@ public enum ObjetEntity {
     SOUSCRIPTION("Souscription"),
     FOURNISSEUR("Fournisseur"),
     PROFIL("Profil"),
-    PROFORMA("Proforma"),
+    PROFORMA("province"),
+    REGION("region"),
+    PROVINCE("province"),
+    COMMUNE("commune"),
     ENTETE("Entete");
 
 

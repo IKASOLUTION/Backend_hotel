@@ -1,12 +1,5 @@
 package com.hotel.bf.dto;
 
-import java.util.Set;
-import java.io.Serializable;
-import java.util.HashSet;
-
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
-import com.hotel.bf.domain.MenuAction;
-
 @Getter
 @Setter
 @SuperBuilder
