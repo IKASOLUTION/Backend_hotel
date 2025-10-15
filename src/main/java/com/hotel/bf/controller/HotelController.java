@@ -1,8 +1,10 @@
 package com.hotel.bf.controller;
 
-import com.hotel.bf.dto.CommuneDto;
+import com.hotel.bf.dto.HotelDto;
+import com.hotel.bf.dto.ProvinceDto;
 import com.hotel.bf.dto.RegionDto;
-import com.hotel.bf.service.CommuneService;
+import com.hotel.bf.service.HotelService;
+import com.hotel.bf.service.ProvinceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,7 +24,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -30,36 +35,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Tags(@Tag(name = "Commune", description = "Gestion des commune"))
-public class CommuneController {
-    private final CommuneService communeService;
+@Tags(@Tag(name = "Hotel", description = "Gestion des hotels"))
+public class HotelController {
+    private final HotelService hotelService;
 
     /**
-     * POST  /communes  : Creates a new commune.
+     * POST  /hotels  : Creates a new Hotel.
      *
-     * @param dto {@link CommuneDto}
-     * @return {@link CommuneDto}
+     * @param dto {@link HotelDto}
+     * @param file {@link MultipartFile}
+     * @return {@link HotelDto}
      */
-    @PostMapping("/communes")
-    @Operation(summary = "Creating a new commune.")
+    @PostMapping("/hotels")
+    @Operation(summary = "Creating a new Hotel.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<CommuneDto> create(@Valid @RequestBody final CommuneDto dto) {
-        return ResponseEntity.ok(communeService.create(dto));
+    public ResponseEntity<HotelDto> create(@Valid @RequestPart("dto") final HotelDto dto,
+                                           @RequestParam(value = "file",required = false) MultipartFile file) {
+        
+        return ResponseEntity.ok(hotelService.create(dto,file));
     }
 
     /**
-     * PUT  /communes/:id  : Updates an existing commune.
+     * PUT  /hotels/:id  : Updates an existing Hotel.
      *
      * @param dto
      * @param id
-     * @return {@link CommuneDto}
+     * @param file
+     * @return {@link HotelDto}
      */
-    @PutMapping("/communes/{id}")
-    @Operation(summary = "Update an existing province.")
+    @PutMapping("/hotels/{id}")
+    @Operation(summary = "Update an existing Hotel.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -67,63 +76,65 @@ public class CommuneController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<CommuneDto> update(@Valid @RequestBody final CommuneDto dto, @PathVariable Long id) {
-        return ResponseEntity.ok(communeService.update(dto, id));
+    public ResponseEntity<HotelDto> update(@Valid @RequestPart("dto") final HotelDto dto,
+                                              @RequestParam(value = "file",required = false) MultipartFile file,
+                                              @PathVariable Long id) {
+        return ResponseEntity.ok(hotelService.update(dto, id,file));
     }
 
     /**
-     * GET / : get all communes.
+     * GET / : get all Hotels.
      *
-     * @return {@link List<CommuneDto>}
+     * @return {@link List<HotelDto>}
      */
-    @GetMapping("/communes")
-    @Operation(summary = "Fetch all communes")
+    @GetMapping("/hotels")
+    @Operation(summary = "Fetch all Hotels")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "204", description = "${swagger.http-status.204}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<CommuneDto>> getAll() {
-        return new ResponseEntity<>(communeService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<HotelDto>> getAll() {
+        return new ResponseEntity<>(hotelService.findAll(), HttpStatus.OK);
     }
 
     /**
-     * GET /:id : get commune.
+     * GET /:id : get hotels.
      *
      * @param id
-     * @return {@link List<CommuneDto>}
+     * @return {@link List<HotelDto>}
      */
-    @GetMapping("/communes/{id}")
-    @Operation(summary = "Get commune")
+    @GetMapping("/hotels/{id}")
+    @Operation(summary = "Get Hotel")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<CommuneDto> findOne(@PathVariable final Long id) {
-        return ResponseEntity.ok(communeService.findOne(id));
+    public ResponseEntity<HotelDto> findOne(@PathVariable final Long id) {
+        return ResponseEntity.ok(hotelService.findOne(id));
     }
 
     /**
-     * DELETE /:id : delete commune.
+     * DELETE /:id : delete Hotel.
      *
      * @param id
-     * @return {@link List<RegionDto>}
+     * @return {@link List<HotelDto>}
      */
-    @DeleteMapping("/communes/{id}")
-    @Operation(summary = "Remove commune")
+    @DeleteMapping("/hotels/{id}")
+    @Operation(summary = "Remove Hotel")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        communeService.delete(id);
+        hotelService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/communes/criteria")
-    @Operation(summary = "fech by page an existing commune.")
+    @GetMapping("/hotels/criteria")
+    @Operation(summary = "fech by page an existing Hotel.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -131,8 +142,8 @@ public class CommuneController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<CommuneDto>> getWithCriteria(final CommuneDto dto , Pageable pageable) {
-        Page<CommuneDto> page = communeService.findByPage(dto,pageable);
+    public ResponseEntity<List<HotelDto>> getWithCriteria(final HotelDto dto , Pageable pageable) {
+        Page<HotelDto> page = hotelService.findByPage(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 

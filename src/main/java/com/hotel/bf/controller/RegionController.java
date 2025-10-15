@@ -131,7 +131,7 @@ public class RegionController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<RegionDto>> getWithCriteria(@RequestBody final RegionDto dto , Pageable pageable) {
+    public ResponseEntity<List<RegionDto>> getWithCriteria(final RegionDto dto , Pageable pageable) {
         Page<RegionDto> page = regionService.findByPage(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }

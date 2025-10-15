@@ -124,7 +124,7 @@ public class ProvinceController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/provinces/criteria")
+    @GetMapping("/provinces/criteria")
     @Operation(summary = "fech by page an existing region.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
@@ -133,7 +133,7 @@ public class ProvinceController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<ProvinceDto>> getWithCriteria(@RequestBody final ProvinceDto dto , Pageable pageable) {
+    public ResponseEntity<List<ProvinceDto>> getWithCriteria(final ProvinceDto dto , Pageable pageable) {
         Page<ProvinceDto> page = provinceService.findByPage(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }

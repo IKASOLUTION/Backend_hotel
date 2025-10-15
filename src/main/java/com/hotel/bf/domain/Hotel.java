@@ -1,5 +1,6 @@
 package com.hotel.bf.domain;
 
+import com.hotel.bf.domain.enums.Statut;
 import jakarta.persistence.*;
 
 import jakarta.validation.constraints.NotNull;
@@ -14,15 +15,6 @@ import lombok.experimental.SuperBuilder;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
-
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.math.BigDecimal;
 
@@ -86,8 +78,9 @@ public class Hotel extends AbstractAuditEntity  implements Serializable {
     @Lob
     private byte[] logo_hotel;
 
-     @Column(name = "status", nullable = true)
-    private Boolean status;
+     @Column(name = "statut", nullable = true)
+     @Enumerated(EnumType.STRING)
+     private Statut statut;
 
      @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties("hotel")
