@@ -43,10 +43,10 @@ public class TokenProvider {
     private String secretKey;
 
     @Value("${spring.security.authentication.jwt.token-validity-in-seconds}")
-    private int tokenValidity;
+    private long tokenValidity;
 
     @Value("${spring.security.authentication.jwt.token-validity-in-seconds-for-remember-me}")
-    private int tokenValidityForRememberMe;
+    private long tokenValidityForRememberMe;
     @Value("${spring.security.authentication.jwt.refresh-token-validity-in-seconds}")
     private long refreshTokenValidity;
 

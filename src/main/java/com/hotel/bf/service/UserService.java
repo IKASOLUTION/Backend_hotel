@@ -273,7 +273,6 @@ public class UserService {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(AuthTokenFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
         boolean result = userRepository.existsByDeletedFalseAndUsername(accountDto.getLogin());
-      //  SecurityUtils.getCurrentUsername();
         if (!result) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bad credentials, Login or password incorrect.");
         }

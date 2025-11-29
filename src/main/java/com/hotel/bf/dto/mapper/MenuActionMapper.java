@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.hotel.bf.domain.MenuAction;
@@ -14,6 +15,8 @@ import com.hotel.bf.dto.MenuActionDto;
  */
 @Component
 public class MenuActionMapper {
+    @Autowired
+    ModuleParamMapper moduleParamMapper;
     public MenuActionDto toDto(MenuAction menuAction) {
     return MenuActionDto.builder()
             .id(menuAction.getId())
@@ -26,15 +29,20 @@ public class MenuActionMapper {
 }
 
 public MenuAction toEntity(MenuActionDto menuActionDto) {
-    return MenuAction.builder()
-            .id(menuActionDto.getId())
+    MenuAction.MenuActionBuilder builder = MenuAction.builder()
             .menuActionLibelle(menuActionDto.getMenuActionLibelle())
             .menuActionCode(menuActionDto.getMenuActionCode())
             .deleted(menuActionDto.getIsDeleted())
             .moduleParam(ModuleParam.builder()
                         .id(menuActionDto.getModuleParamId())
-                        .build())
-            .build();
+                        .build());
+    
+    // Only set ID if it's not null (for updates)
+    if (menuActionDto.getId() != null && menuActionDto.getId() > 0) {
+        builder.id(menuActionDto.getId());
+    }
+    
+    return builder.build();
 }
 
 public Set<MenuActionDto> setToDtos(Set<MenuAction> menuActions) {
@@ -52,3 +60,4 @@ public List<MenuAction> toEntities(List<MenuActionDto> menuActionDtos) {
 }
 
 }
+ 
