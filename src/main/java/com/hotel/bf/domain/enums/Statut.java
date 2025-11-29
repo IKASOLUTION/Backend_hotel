@@ -7,7 +7,9 @@ public enum Statut {
 
     ACTIF("Actif"),
     INACTIF("Inactif"),
-    SUPPRIME("Supprimer");
+    SUPPRIME("Supprimer"),
+    SUSPENDUE("Suspendue"),
+    APPREHENDEE("Apprehendée");
 
     private final String label;
 
