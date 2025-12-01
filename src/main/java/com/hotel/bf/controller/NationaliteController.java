@@ -1,6 +1,8 @@
 package com.hotel.bf.controller;
 
+import com.hotel.bf.dto.NationaliteDto;
 import com.hotel.bf.dto.RegionDto;
+import com.hotel.bf.service.NationaliteService;
 import com.hotel.bf.service.RegionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -29,37 +31,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Tags(@Tag(name = "Region", description = "Gestion des regions"))
-public class RegionController {
-    private final RegionService regionService;
+@Tags(@Tag(name = "Nationalite", description = "Gestion des nationalites"))
+public class NationaliteController {
+    private final NationaliteService nationaliteService;
 
     /**
-     * POST  /regions  : Creates a new region.
+     * POST  /nationalites  : Creates a new nationalites.
      *
-     * @param dto {@link RegionDto}
-     * @return {@link RegionDto}
+     * @param dto {@link NationaliteDto}
+     * @return {@link NationaliteDto}
      */
-    @PostMapping("/regions")
-    @Operation(summary = "Creating a new region.")
+    @PostMapping("/nationalites")
+    @Operation(summary = "Creating a new nationalites.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> create(@Valid @RequestBody final RegionDto dto) {
+    public ResponseEntity<NationaliteDto> create(@Valid @RequestBody final NationaliteDto dto) {
         
-        return ResponseEntity.ok(regionService.create(dto));
+        return ResponseEntity.ok(nationaliteService.create(dto));
     }
 
     /**
-     * PUT  /regions/:id  : Updates an existing region.
+     * PUT  /nationalites/:id  : Updates an existing nationalites.
      *
      * @param dto
      * @param id
-     * @return {@link RegionDto}
+     * @return {@link NationaliteDto}
      */
-    @PutMapping("/regions/{id}")
-    @Operation(summary = "Update an existing region.")
+    @PutMapping("/nationalites/{id}")
+    @Operation(summary = "Update an existing nationalites.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -67,63 +69,63 @@ public class RegionController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> update(@Valid @RequestBody final RegionDto dto, @PathVariable Long id) {
-        return ResponseEntity.ok(regionService.update(dto, id));
+    public ResponseEntity<NationaliteDto> update(@Valid @RequestBody final NationaliteDto dto, @PathVariable Long id) {
+        return ResponseEntity.ok(nationaliteService.update(dto, id));
     }
 
     /**
-     * GET / : get all regions.
+     * GET / : get all nationalites.
      *
-     * @return {@link List<RegionDto>}
+     * @return {@link List<NationaliteDto>}
      */
-    @GetMapping("/regions")
-    @Operation(summary = "Fetch all regions")
+    @GetMapping("/nationalites")
+    @Operation(summary = "Fetch all nationalites")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "204", description = "${swagger.http-status.204}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<RegionDto>> getAll() {
-        return new ResponseEntity<>(regionService.findAll(), HttpStatus.OK);
+    public ResponseEntity<List<NationaliteDto>> getAll() {
+        return new ResponseEntity<>(nationaliteService.findAll(), HttpStatus.OK);
     }
 
     /**
-     * GET /:id : get region.
+     * GET /:id : get nationalites.
      *
      * @param id
-     * @return {@link List<RegionDto>}
+     * @return {@link List<NationaliteDto>}
      */
-    @GetMapping("/regions/{id}")
-    @Operation(summary = "Get region")
+    @GetMapping("/nationalites/{id}")
+    @Operation(summary = "Get nationalites")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> findOne(@PathVariable final Long id) {
-        return ResponseEntity.ok(regionService.findOne(id));
+    public ResponseEntity<NationaliteDto> findOne(@PathVariable final Long id) {
+        return ResponseEntity.ok(nationaliteService.findOne(id));
     }
 
     /**
-     * DELETE /:id : delete region.
+     * DELETE /:id : delete nationalites.
      *
      * @param id
-     * @return {@link List<RegionDto>}
+     * @return {@link List<NationaliteDto>}
      */
-    @DeleteMapping("/regions/{id}")
-    @Operation(summary = "Remove region")
+    @DeleteMapping("/nationalites/{id}")
+    @Operation(summary = "Remove nationalites")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        regionService.delete(id);
+        nationaliteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/regions/criteria")
-    @Operation(summary = "fech by page an existing region.")
+    @PostMapping("/nationalites/criteria")
+    @Operation(summary = "fech by page an existing nationalites.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -131,8 +133,8 @@ public class RegionController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<RegionDto>> getWithCriteria(@Valid final @RequestBody RegionDto dto , Pageable pageable) {
-        Page<RegionDto> page = regionService.findByPage(dto,pageable);
+    public ResponseEntity<List<NationaliteDto>> getWithCriteria(final @RequestBody NationaliteDto dto , Pageable pageable) {
+        Page<NationaliteDto> page = nationaliteService.findByPage(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 

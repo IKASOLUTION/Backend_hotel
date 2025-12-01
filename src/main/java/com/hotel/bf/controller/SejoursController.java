@@ -1,7 +1,9 @@
 package com.hotel.bf.controller;
 
-import com.hotel.bf.dto.RegionDto;
-import com.hotel.bf.service.RegionService;
+import com.hotel.bf.dto.HotelDto;
+import com.hotel.bf.dto.SejoursDto;
+import com.hotel.bf.service.HotelService;
+import com.hotel.bf.service.SejoursService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,7 +23,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,37 +34,40 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Tags(@Tag(name = "Region", description = "Gestion des regions"))
-public class RegionController {
-    private final RegionService regionService;
+@Tags(@Tag(name = "Hotel", description = "Gestion des sejours"))
+public class SejoursController {
+    private final SejoursService sejoursService;
 
     /**
-     * POST  /regions  : Creates a new region.
+     * POST  /sejours  : Creates a new sejours.
      *
-     * @param dto {@link RegionDto}
-     * @return {@link RegionDto}
+     * @param dto {@link SejoursDto}
+     * @param file {@link MultipartFile}
+     * @return {@link SejoursDto}
      */
-    @PostMapping("/regions")
-    @Operation(summary = "Creating a new region.")
+    @PostMapping("/sejours")
+    @Operation(summary = "Creating a new sejours.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> create(@Valid @RequestBody final RegionDto dto) {
+    public ResponseEntity<SejoursDto> create(@Valid @RequestPart("dto") final SejoursDto dto,
+                                             @RequestParam(value = "file",required = false) MultipartFile file) {
         
-        return ResponseEntity.ok(regionService.create(dto));
+        return ResponseEntity.ok(sejoursService.create(dto,file));
     }
 
     /**
-     * PUT  /regions/:id  : Updates an existing region.
+     * PUT  /sejours/:id  : Updates an existing sejours.
      *
      * @param dto
      * @param id
-     * @return {@link RegionDto}
+     * @param file
+     * @return {@link SejoursDto}
      */
-    @PutMapping("/regions/{id}")
-    @Operation(summary = "Update an existing region.")
+    @PutMapping("/sejours/{id}")
+    @Operation(summary = "Update an existing sejours.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -67,63 +75,49 @@ public class RegionController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> update(@Valid @RequestBody final RegionDto dto, @PathVariable Long id) {
-        return ResponseEntity.ok(regionService.update(dto, id));
+    public ResponseEntity<SejoursDto> update(@Valid @RequestPart("dto") final SejoursDto dto,
+                                              @RequestParam(value = "file",required = false) MultipartFile file,
+                                              @PathVariable Long id) {
+        return ResponseEntity.ok(sejoursService.update(dto, id,file));
     }
 
     /**
-     * GET / : get all regions.
-     *
-     * @return {@link List<RegionDto>}
-     */
-    @GetMapping("/regions")
-    @Operation(summary = "Fetch all regions")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
-            @ApiResponse(responseCode = "204", description = "${swagger.http-status.204}"),
-            @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
-    })
-    public ResponseEntity<List<RegionDto>> getAll() {
-        return new ResponseEntity<>(regionService.findAll(), HttpStatus.OK);
-    }
-
-    /**
-     * GET /:id : get region.
+     * GET /:id : get sejours.
      *
      * @param id
-     * @return {@link List<RegionDto>}
+     * @return {@link List<SejoursDto>}
      */
-    @GetMapping("/regions/{id}")
-    @Operation(summary = "Get region")
+    @GetMapping("/sejours/{id}")
+    @Operation(summary = "Get sejours")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<RegionDto> findOne(@PathVariable final Long id) {
-        return ResponseEntity.ok(regionService.findOne(id));
+    public ResponseEntity<SejoursDto> findOne(@PathVariable final Long id) {
+        return ResponseEntity.ok(sejoursService.findOne(id));
     }
 
     /**
-     * DELETE /:id : delete region.
+     * DELETE /:id : delete Hotel.
      *
      * @param id
-     * @return {@link List<RegionDto>}
+     * @return {@link List<HotelDto>}
      */
-    @DeleteMapping("/regions/{id}")
-    @Operation(summary = "Remove region")
+    @DeleteMapping("/sejours/{id}")
+    @Operation(summary = "Remove sejours")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        regionService.delete(id);
+        sejoursService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/regions/criteria")
-    @Operation(summary = "fech by page an existing region.")
+    @GetMapping("/sejours/criteria")
+    @Operation(summary = "fech by page an existing sejours.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -131,8 +125,8 @@ public class RegionController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<RegionDto>> getWithCriteria(@Valid final @RequestBody RegionDto dto , Pageable pageable) {
-        Page<RegionDto> page = regionService.findByPage(dto,pageable);
+    public ResponseEntity<List<SejoursDto>> getWithCriteria(final @RequestBody SejoursDto dto , Pageable pageable) {
+        Page<SejoursDto> page = sejoursService.findByCriteria(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 

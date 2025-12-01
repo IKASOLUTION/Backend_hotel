@@ -21,6 +21,8 @@ public enum ObjetEntity {
     PROVINCE("province"),
     COMMUNE("commune"),
     LISTE_NOIRE("Liste noire"),
+    SEJOURS("Sejours"),
+    NATIONALITE("Nationalite"),
     ENTETE("Entete");
 
 

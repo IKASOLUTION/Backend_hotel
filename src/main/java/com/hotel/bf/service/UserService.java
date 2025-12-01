@@ -1,6 +1,5 @@
 package com.hotel.bf.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -12,11 +11,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import com.hotel.bf.config.audit.EntityAuditAction;
 import com.hotel.bf.config.audit.ObjetEntity;
@@ -24,27 +22,18 @@ import com.hotel.bf.config.security.SecurityUtils;
 import com.hotel.bf.config.security.TestUserDetailsService;
 import com.hotel.bf.config.security.jwt.AuthTokenFilter;
 import com.hotel.bf.config.security.jwt.TokenProvider;
-import com.hotel.bf.domain.Authority;
 import com.hotel.bf.domain.MenuAction;
-import com.hotel.bf.domain.ParametreMail;
-import com.hotel.bf.domain.Trace;
 import com.hotel.bf.domain.User;
 import com.hotel.bf.dto.AccountDto;
 import com.hotel.bf.dto.JWTToken;
 import com.hotel.bf.dto.LoginResponse;
-import com.hotel.bf.dto.TicketDto;
 import com.hotel.bf.dto.UserDto;
-import com.hotel.bf.dto.mapper.ProfilMapper;
 import com.hotel.bf.dto.mapper.UserMapper;
-import com.hotel.bf.repository.ParametreMailRepository;
 import com.hotel.bf.repository.ProfilRepository;
-import com.hotel.bf.repository.TraceRepository;
 import com.hotel.bf.repository.UserRepository;
 import com.hotel.bf.service.util.RandomUtil;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
@@ -54,7 +43,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -68,11 +56,9 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final TestUserDetailsService userDetailsService;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final TraceRepository traceRepository;
     private final EmailService emailService;
     private final TraceService traceService;
     private final ProfilRepository profilRepository;
-    private final ParametreMailRepository mailRepository;
     private static final int EXPIRATION = 60 * 24;
    
 
@@ -80,13 +66,11 @@ public class UserService {
     /**
      * Save user.
      *
-     * @param userDto {@link test.projects.ennov.dto.UserDto}
+     * @param userDto {@link UserDto}
      * @return saved user object
      */
     private UserDto saveUser(final UserDto userDto) {
-        System.out.println("=============parts==========="+userDto.getEmailAddress());
         String[] parts = userDto.getEmailAddress().split("@");
-        System.out.println("==============parts=========="+parts.length);
         userDto.setLogin(parts[0]);
         
         User user = mapper.toEntity(userDto);
@@ -189,7 +173,7 @@ public class UserService {
     /**
      * Create new user.
      *
-     * @param userDto {@link test.projects.ennov.dto.UserDto}
+     * @param userDto {@link UserDto}
      * @return created user object
      */
     public UserDto createUser(final UserDto userDto) {
@@ -206,7 +190,7 @@ public class UserService {
     /**
      * Update existing user.
      *
-     * @param userDto {@link test.projects.ennov.dto.UserDto}
+     * @param userDto {@link UserDto}
      * @return updated user object
      */
     public UserDto updateUser(final UserDto userDto, final long id) {
@@ -240,7 +224,7 @@ public class UserService {
     /**
      * Fetch all user stored in DB.
      *
-     * @return list of {@link test.projects.ennov.dto.UserDto}
+     * @return list of {@link UserDto}
      */
     public List<UserDto> findAllUser() {
         System.out.println("========userCurent===================="+SecurityUtils.getCurrentUsername());
@@ -383,5 +367,9 @@ public class UserService {
             traceService.writeAuditEvent( EntityAuditAction.DELETE, ObjetEntity.USER);
         });
         return true;
+    }
+
+    public Optional<User> getUserWithAuthorities() {
+        return SecurityUtils.getCurrentUserLogin().flatMap(userRepository::findOneByDeletedFalseAndUsername);
     }
 }
