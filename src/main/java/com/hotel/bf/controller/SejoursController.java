@@ -52,10 +52,9 @@ public class SejoursController {
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<SejoursDto> create(@Valid @RequestPart("dto") final SejoursDto dto,
-                                             @RequestParam(value = "file",required = false) MultipartFile file) {
+    public ResponseEntity<SejoursDto> create(@Valid @RequestPart("dto") final SejoursDto dto) {
         
-        return ResponseEntity.ok(sejoursService.create(dto,file));
+        return ResponseEntity.ok(sejoursService.create(dto));
     }
 
     /**

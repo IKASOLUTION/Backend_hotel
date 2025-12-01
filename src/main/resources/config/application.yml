@@ -36,3 +36,7 @@ logging:
     org.hibernate: ERROR
     org: INFO
     root: WARN
+files:
+  upload:
+    # baseDir: C:\Users\USER\Documents\identite
+    baseDir: C:\Users\dgsi\Documents\identite\identite

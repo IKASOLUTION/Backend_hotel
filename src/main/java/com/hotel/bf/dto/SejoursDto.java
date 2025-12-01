@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -61,6 +63,10 @@ public class SejoursDto extends AbstractAuditEntityDto {
     private Boolean synchronise;
 
     private StatutSejour statut;
+
+    private MultipartFile photoFile;
+
+    private MultipartFile signatureFile;
 
     private NationaliteDto nationalite;
 

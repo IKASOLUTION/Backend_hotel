@@ -27,6 +27,7 @@ public class SejoursService {
     private final SejoursRepository sejoursRepository;
     private final SejoursMapper sejoursMapper;
     private final TraceService traceService;
+    private final FileService fileService;
     private final SejoursSpecification sejoursSpecification;
 
 
@@ -36,11 +37,15 @@ public class SejoursService {
      * @param dto {@link SejoursDto}
      * @return saved sejours object
      */
-    public SejoursDto create(final SejoursDto dto, MultipartFile file) {
+    public SejoursDto create(final SejoursDto dto) {
         try {
             Sejours sejours = sejoursMapper.toEntity(dto);
-            if (!file.isEmpty()) {
-             //   sejours.setLogo_hotel(file.getBytes());
+            sejours= sejoursRepository.save(sejours);
+            if (!dto.getPhotoFile().isEmpty()) {
+                sejours.setPhoto(fileService.uploadFile(dto.getPhotoFile(), sejours.getId()));
+            }
+            if (!dto.getSignatureFile().isEmpty()) {
+                sejours.setSignature(fileService.uploadFile(dto.getSignatureFile(), sejours.getId()));
             }
             sejours= sejoursRepository.save(sejours);
             return sejoursMapper.toDto(sejours);
@@ -65,10 +70,15 @@ public class SejoursService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already created sejoursDto cannot have null ID.");
             }
             Sejours sejours = sejoursMapper.toEntity(dto);
-            if (!file.isEmpty()) {
-              //  sejours.setLogo_hotel(file.getBytes());
+            sejours = sejoursRepository.save(sejours);
+            if (!dto.getPhotoFile().isEmpty()) {
+                sejours.setPhoto(fileService.uploadFile(dto.getPhotoFile(), sejours.getId()));
             }
-            return sejoursMapper.toDto(sejoursRepository.save(sejours));
+            if (!dto.getSignatureFile().isEmpty()) {
+                sejours.setSignature(fileService.uploadFile(dto.getSignatureFile(), sejours.getId()));
+            }
+            sejours= sejoursRepository.save(sejours);
+            return sejoursMapper.toDto(sejours);
         } catch (Exception e) {
             throw new RuntimeException("Erreur lors de l’enregistrement du logo", e);
 
