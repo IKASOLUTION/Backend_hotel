@@ -14,10 +14,15 @@ import java.util.List;
 public class SejoursMapper {
     @Autowired
     private RegionMapper regionMapper;
+    @Autowired
     private NationaliteMapper nationaliteMapper;
+    @Autowired
     private UserMapper userMapper;
+    @Autowired
     private HotelMapper hotelMapper;
+    @Autowired
     private ProvinceMapper provinceMapper;
+    @Autowired
     private CommuneMapper communeMapper;
 
     public SejoursDto toDto(Sejours dt) {

@@ -1,9 +1,7 @@
 package com.hotel.bf.controller;
 
-import com.hotel.bf.dto.HotelDto;
-import com.hotel.bf.dto.SejoursDto;
-import com.hotel.bf.service.HotelService;
-import com.hotel.bf.service.SejoursService;
+import com.hotel.bf.dto.AlerteDto;
+import com.hotel.bf.service.AlerteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -14,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,38 +28,37 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Tags(@Tag(name = "Hotel", description = "Gestion des sejours"))
-public class SejoursController {
-    private final SejoursService sejoursService;
+@Tags(@Tag(name = "Alerte", description = "Gestion des alertes"))
+public class AlerteController {
+    private final AlerteService alerteService;
 
     /**
-     * POST  /sejours  : Creates a new sejours.
+     * POST  /alertes  : Creates a new alertes.
      *
-     * @param dto {@link SejoursDto}
-     * @return {@link SejoursDto}
+     * @param dto {@link AlerteDto}
+     * @return {@link AlerteDto}
      */
-    @PostMapping("/sejours")
-    @Operation(summary = "Creating a new sejours.")
+    @PostMapping("/alertes")
+    @Operation(summary = "Creating a new alertes.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<SejoursDto> create(@Valid @RequestBody final SejoursDto dto) {
+    public ResponseEntity<AlerteDto> create(@Valid @RequestBody final AlerteDto dto) {
         
-        return ResponseEntity.ok(sejoursService.create(dto));
+        return ResponseEntity.ok(alerteService.create(dto));
     }
 
     /**
-     * PUT  /sejours/:id  : Updates an existing sejours.
+     * PUT  /alertes/:id  : Updates an existing Alerte.
      *
      * @param dto
      * @param id
-     * @param file
-     * @return {@link SejoursDto}
+     * @return {@link AlerteDto}
      */
-    @PutMapping("/sejours/{id}")
-    @Operation(summary = "Update an existing sejours.")
+    @PutMapping("/alertes/{id}")
+    @Operation(summary = "Update an existing alertes.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -73,49 +66,48 @@ public class SejoursController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<SejoursDto> update(@Valid @RequestPart("dto") final SejoursDto dto,
-                                              @RequestParam(value = "file",required = false) MultipartFile file,
+    public ResponseEntity<AlerteDto> update(@Valid @RequestBody final AlerteDto dto,
                                               @PathVariable Long id) {
-        return ResponseEntity.ok(sejoursService.update(dto, id,file));
+        return ResponseEntity.ok(alerteService.update(dto, id));
     }
 
     /**
-     * GET /:id : get sejours.
+     * GET /:id : get alertes.
      *
      * @param id
-     * @return {@link List<SejoursDto>}
+     * @return {@link List<AlerteDto>}
      */
-    @GetMapping("/sejours/{id}")
-    @Operation(summary = "Get sejours")
+    @GetMapping("/alertes/{id}")
+    @Operation(summary = "Get alertes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "404", description = "${swagger.http-status.404}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<SejoursDto> findOne(@PathVariable final Long id) {
-        return ResponseEntity.ok(sejoursService.findOne(id));
+    public ResponseEntity<AlerteDto> findOne(@PathVariable final Long id) {
+        return ResponseEntity.ok(alerteService.findOne(id));
     }
 
     /**
-     * DELETE /:id : delete Hotel.
+     * DELETE /:id : delete alertes.
      *
      * @param id
-     * @return {@link List<HotelDto>}
+     * @return {@link List<AlerteDto>}
      */
-    @DeleteMapping("/sejours/{id}")
-    @Operation(summary = "Remove sejours")
+    @DeleteMapping("/alertes/{id}")
+    @Operation(summary = "Remove alertes")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
     public ResponseEntity<Void> delete(@PathVariable final Long id) {
-        sejoursService.delete(id);
+        alerteService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/sejours/criteria")
-    @Operation(summary = "fech by page an existing sejours.")
+    @GetMapping("/alertes/criteria")
+    @Operation(summary = "fech by page an existing alertes.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "${swagger.http-status.200}"),
             @ApiResponse(responseCode = "400", description = "${swagger.http-status.400}"),
@@ -123,8 +115,8 @@ public class SejoursController {
             @ApiResponse(responseCode = "409", description = "${swagger.http-status.409}"),
             @ApiResponse(responseCode = "500", description = "${swagger.http-status.500}")
     })
-    public ResponseEntity<List<SejoursDto>> getWithCriteria(final @RequestBody SejoursDto dto , Pageable pageable) {
-        Page<SejoursDto> page = sejoursService.findByCriteria(dto,pageable);
+    public ResponseEntity<List<AlerteDto>> getWithCriteria(final @RequestBody AlerteDto dto , Pageable pageable) {
+        Page<AlerteDto> page = alerteService.findByCriteria(dto,pageable);
         return ResponseEntity.ok().body(page.getContent());
     }
 
